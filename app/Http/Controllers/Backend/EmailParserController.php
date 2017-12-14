@@ -51,12 +51,14 @@ class EmailParserController extends Controller
                 ]
             )
             // ->asJson()
+            ->withResponseHeaders()
+            ->returnResponseObject()
             ->post();
         
         return response()->json([
-            'status' => 200,
+            'status' => $response->status,
             'success' => 1,
-            'result' => $response
+            'result' => $response->content
         ]);
     }
 }

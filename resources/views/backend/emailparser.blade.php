@@ -91,7 +91,7 @@
                 dataType: 'json',
             })
 
-            request.done(saveFbSuccess);
+            request.done(saveFbMsg);
             request.fail(function(e) {
                 throw 'Error';
             });
@@ -109,8 +109,9 @@
             return fbFields;
         }
 
-        function saveFbSuccess(data) {
-            $('#success-msg').html(`<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Success!</strong> ${data.result}.</div>`);
+        function saveFbMsg(data) {
+            let status = data.status == 200 ? 'Success' : 'Error'
+            $('#success-msg').html(`<div class="alert alert-${status.toLowerCase()}"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>${status}!</strong> ${data.result}.</div>`);
             $('#result').hide();
             $('#success-msg').show();
         }
