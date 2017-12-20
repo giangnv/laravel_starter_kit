@@ -34,3 +34,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      */
     includeRouteFiles(__DIR__.'/Backend/');
 });
+
+Route::resource('admin/posts', 'Backend\\PostsController');
+Route::resource('admin/blog-posts', 'Backend\\BlogPostsController');
+Route::resource('admin/company', 'Backend\\CompanyController');
+Route::resource('admin/dictionary', 'Backend\\DictionaryController');

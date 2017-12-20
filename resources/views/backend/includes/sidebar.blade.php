@@ -44,6 +44,20 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/company')) }}">
+                <a href="{{ route('company.index') }}">
+                    <i class="fa fa-circle-o"></i>
+                    <span>Company</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/dictionary')) }}">
+                <a href="{{ route('dictionary.index') }}">
+                    <i class="fa fa-circle-o"></i>
+                    <span>Dictionaries</span>
+                </a>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             @role(1)
