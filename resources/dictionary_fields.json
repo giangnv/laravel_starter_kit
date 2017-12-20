@@ -1,0 +1,34 @@
+{
+    "fields": [
+        {
+            "name": "app_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "surface",
+            "type": "text"
+        },
+        {
+            "name": "value",
+            "type": "text"
+        },
+        {
+            "name": "cat_name",
+            "type": "text"
+        },
+        {
+            "name": "value_type",
+            "type": "text"
+        },
+        {
+            "name": "type",
+            "type": "string"
+        }
+    ],
+    "validations": [
+        {
+            "field": "app_id",
+            "rules": "required"
+        }
+    ]
+}

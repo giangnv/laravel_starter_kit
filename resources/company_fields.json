@@ -1,0 +1,62 @@
+{
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "phone",
+            "type": "string"
+        },
+        {
+            "name": "fax",
+            "type": "string"
+        },
+        {
+            "name": "postal",
+            "type": "string"
+        },
+        {
+            "name": "address",
+            "type": "string"
+        },
+        {
+            "name": "cd_id",
+            "type": "string"
+        },
+        {
+            "name": "representative",
+            "type": "string"
+        },
+        {
+            "name": "representative_last_name",
+            "type": "string"
+        },
+        {
+            "name": "representative_first_name",
+            "type": "string"
+        },
+        {
+            "name": "establisted",
+            "type": "date"
+        },
+        {
+            "name": "listed_id",
+            "type": "integer"
+        },
+        {
+            "name": "employees",
+            "type": "integer"
+        },
+        {
+            "name": "capital",
+            "type": "integer"
+        }
+    ],
+    "validations": [
+        {
+            "field": "name",
+            "rules": "required|max:60"
+        }
+    ]
+}
