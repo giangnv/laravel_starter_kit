@@ -76,6 +76,8 @@ class AppServiceProvider extends ServiceProvider
              * Load third party local aliases
              */
             $loader->alias('Debugbar', \Barryvdh\Debugbar\Facade::class);
+
+            $this->app->register('Appzcoder\CrudGenerator\CrudGeneratorServiceProvider');
         }
     }
 }

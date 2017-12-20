@@ -204,6 +204,8 @@ return [
 
         Ixudra\Curl\CurlServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
