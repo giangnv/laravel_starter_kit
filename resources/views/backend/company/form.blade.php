@@ -53,7 +53,7 @@
         {!! $errors->first('representative_first_name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('established') ? 'has-error' : ''}}">
-    <label for="established" class="col-md-4 control-label">{{ 'established' }}</label>
+    <label for="established" class="col-md-4 control-label">{{ 'Established' }}</label>
     <div class="col-md-6">
         <input class="form-control" name="established" type="date" id="established" value="{{ $company->established or ''}}" >
         {!! $errors->first('established', '<p class="help-block">:message</p>') !!}
