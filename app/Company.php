@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+
+    /**
+     * The connection name for the model.
+     *
+     * @var string
+     */
+    protected $connection = 'mysql_company';
+
     /**
      * The database table used by the model.
      *
