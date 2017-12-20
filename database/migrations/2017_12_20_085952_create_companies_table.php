@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('representative')->nullable();
             $table->string('representative_last_name')->nullable();
             $table->string('representative_first_name')->nullable();
-            $table->date('establisted')->nullable();
+            $table->date('established')->nullable();
             $table->integer('listed_id')->nullable();
             $table->integer('employees')->nullable();
             $table->integer('capital')->nullable();

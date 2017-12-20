@@ -52,11 +52,11 @@
         <input class="form-control" name="representative_first_name" type="text" id="representative_first_name" value="{{ $company->representative_first_name or ''}}" >
         {!! $errors->first('representative_first_name', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('establisted') ? 'has-error' : ''}}">
-    <label for="establisted" class="col-md-4 control-label">{{ 'Establisted' }}</label>
+</div><div class="form-group {{ $errors->has('established') ? 'has-error' : ''}}">
+    <label for="established" class="col-md-4 control-label">{{ 'established' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="establisted" type="date" id="establisted" value="{{ $company->establisted or ''}}" >
-        {!! $errors->first('establisted', '<p class="help-block">:message</p>') !!}
+        <input class="form-control" name="established" type="date" id="established" value="{{ $company->established or ''}}" >
+        {!! $errors->first('established', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('listed_id') ? 'has-error' : ''}}">
     <label for="listed_id" class="col-md-4 control-label">{{ 'Listed Id' }}</label>

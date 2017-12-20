@@ -30,7 +30,7 @@ class CompanyController extends Controller
                 ->orWhere('representative', 'LIKE', "%$keyword%")
                 ->orWhere('representative_last_name', 'LIKE', "%$keyword%")
                 ->orWhere('representative_first_name', 'LIKE', "%$keyword%")
-                ->orWhere('establisted', 'LIKE', "%$keyword%")
+                ->orWhere('established', 'LIKE', "%$keyword%")
                 ->orWhere('listed_id', 'LIKE', "%$keyword%")
                 ->orWhere('employees', 'LIKE', "%$keyword%")
                 ->orWhere('capital', 'LIKE', "%$keyword%")

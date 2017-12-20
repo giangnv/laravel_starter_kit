@@ -33,7 +33,7 @@ class Company extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'fax', 'postal', 'address', 'cd_id', 'representative', 'representative_last_name', 'representative_first_name', 'establisted', 'listed_id', 'employees', 'capital'];
+    protected $fillable = ['name', 'phone', 'fax', 'postal', 'address', 'cd_id', 'representative', 'representative_last_name', 'representative_first_name', 'established', 'listed_id', 'employees', 'capital'];
 
     
 }
