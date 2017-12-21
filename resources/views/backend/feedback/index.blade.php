@@ -46,7 +46,7 @@
                                 @foreach($feedback as $item)
                                     <tr class={{ $item->status ? "success" : ""}}>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td><textarea class="form-control" row="5" >{{ $item->email }}</textarea></td>
+                                        <td><textarea class="form-control" row="15" >{{ $item->email }}</textarea></td>
                                         <td class="feedback_content">{{ $item->fb }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
