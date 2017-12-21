@@ -87,7 +87,12 @@
                     return jsonObj.hasOwnProperty(key) ? jsonObj[key] : ''
                 });
 
-                var newText = feedbackOrdered.map((fb, key) => `<p><strong>${ordering[key]}</strong>: ${fb}</p>`).join('')
+                var newText = feedbackOrdered.map((fb, key) => {
+                    if (!fb) {
+                        return ''
+                    }
+                    return `<p><strong>${ordering[key]}</strong>: ${fb}</p>`
+                }).join('')
                 
                 $(this).html(newText);
                 $(this).parent().find('textarea').height($(this).height() - 10)
