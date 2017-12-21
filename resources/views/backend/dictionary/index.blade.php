@@ -36,7 +36,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>App Id</th><th>surface</th><th>Value</th><th>Actions</th>
+                                        <th>#</th><th>App Id</th><th>Surface</th><th>Value</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>

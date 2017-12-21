@@ -32,17 +32,23 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Email</th><th>Fb</th><th>Status</th><th>Actions</th>
+                                        <th width="5%">#</th>
+                                        <th width="30%">Email</th>
+                                        <th width="45%">Fb</th>
+                                        <th width="5%">Status</th>
+                                        <th width="15%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($feedback as $item)
                                     <tr class={{ $item->status ? "success" : ""}}>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->email }}</td><td>{{ $item->fb }}</td><td>{{ $item->status }}</td>
+                                        <td><textarea class="form-control" row="5" >{{ $item->email }}</textarea></td>
+                                        <td>{{ $item->fb }}</td>
+                                        <td>{{ $item->status }}</td>
                                         <td>
                                             <a href="{{ url('/admin/feedback/' . $item->id) }}" title="View Feedback"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/feedback/' . $item->id . '/edit') }}" title="Edit Feedback"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
