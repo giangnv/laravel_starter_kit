@@ -76,11 +76,19 @@
         $('#fb-list tr td.feedback_content').each(function() {
             try {
                 var jsonObj = JSON.parse($(this).html())
-                var newText = '';
+                var ordering = [
+                    'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
+                    'given_name_katakana', 'email', 'dept', 'position', 'company_name',
+                    'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
+                ];
+
+                var feedbackOrdered = ordering.map(orderItem => {
+                    let key = `fb[${orderItem}]`
+                    return jsonObj.hasOwnProperty(key) ? jsonObj[key] : ''
+                });
+
+                var newText = feedbackOrdered.map((fb, key) => `<p><strong>${ordering[key]}</strong>: ${fb}</p>`).join('')
                 
-                for(x in jsonObj) {
-                    newText += `<p><strong>${x}</strong> : ${jsonObj[x]}</p>`
-                }
                 $(this).html(newText);
                 $(this).parent().find('textarea').height($(this).height() - 10)
             } catch (e) {
