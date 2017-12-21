@@ -14,10 +14,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Feedback</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/feedback/create') }}" class="btn btn-success btn-sm" title="Add New Feedback">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
-
                         <form method="GET" action="{{ url('/admin/feedback') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
@@ -37,7 +33,7 @@
                                     <tr>
                                         <th width="5%">#</th>
                                         <th width="30%">Email</th>
-                                        <th width="45%">Fb</th>
+                                        <th width="45%">Feedback content</th>
                                         <th width="5%">Status</th>
                                         <th width="15%">Actions</th>
                                     </tr>

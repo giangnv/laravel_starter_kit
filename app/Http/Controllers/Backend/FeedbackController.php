@@ -40,7 +40,8 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        return view('backend.feedback.create');
+        // return view('backend.feedback.create');
+        return abort(404);
     }
 
     /**
