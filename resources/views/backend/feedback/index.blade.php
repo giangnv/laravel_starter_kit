@@ -32,7 +32,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table id="fb-list" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th width="5%">#</th>
@@ -47,7 +47,7 @@
                                     <tr class={{ $item->status ? "success" : ""}}>
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td><textarea class="form-control" row="5" >{{ $item->email }}</textarea></td>
-                                        <td>{{ $item->fb }}</td>
+                                        <td class="feedback_content">{{ $item->fb }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
                                             <a href="{{ url('/admin/feedback/' . $item->id) }}" title="View Feedback"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
@@ -72,3 +72,24 @@
         </div>
     </div>
 @endsection
+
+{{ Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}
+
+<script type="application/javascript" language="javascript">
+    $(document).ready(function(){
+        $('#fb-list tr td.feedback_content').each(function() {
+            try {
+                var jsonObj = JSON.parse($(this).html())
+                var newText = '';
+                
+                for(x in jsonObj) {
+                    newText += `<p><strong>${x}</strong> : ${jsonObj[x]}</p>`
+                }
+                $(this).html(newText);
+            } catch (e) {
+                return false;
+            }
+        });
+    })
+    
+</script>
