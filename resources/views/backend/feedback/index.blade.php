@@ -86,6 +86,7 @@
                     newText += `<p><strong>${x}</strong> : ${jsonObj[x]}</p>`
                 }
                 $(this).html(newText);
+                $(this).parent().find('textarea').height($(this).height() - 10)
             } catch (e) {
                 return false;
             }
