@@ -13,13 +13,13 @@
 </div><div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
     <label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="status" type="text" id="status" value="{{ $feedback->status or ''}}" >
+        <input class="form-control" name="status" type="number" id="status" value="{{ $feedback->status or ''}}" >
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('create_time') ? 'has-error' : ''}}">
     <label for="create_time" class="col-md-4 control-label">{{ 'Create Time' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="create_time" type="datetime-local" id="create_time" value="{{ $feedback->create_time or ''}}" >
+        <input class="form-control" name="create_time" type="text" id="create_time" value="{{ $feedback->create_time or ''}}" >
         {!! $errors->first('create_time', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

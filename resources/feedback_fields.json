@@ -10,11 +10,11 @@
         },
         {
             "name": "status",
-            "type": "string"
+            "type": "integer"
         },
         {
             "name": "create_time",
-            "type": "datetime"
+            "type": "date"
         }
     ],
     "validations": [

@@ -1,9 +1,16 @@
 @extends('backend.layouts.app')
 
+@section('page-header')
+    <h1>
+        {{ app_name() }}
+        <small>Edit a feedback</small>
+    </h1>
+@endsection
+
 @section('content')
-    <div class="container">
+    <div class="container-fb">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Edit Feedback #{{ $feedback->id }}</div>
                     <div class="panel-body">
