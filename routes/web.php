@@ -39,3 +39,5 @@ Route::resource('admin/posts', 'Backend\\PostsController');
 Route::resource('admin/blog-posts', 'Backend\\BlogPostsController');
 Route::resource('admin/company', 'Backend\\CompanyController');
 Route::resource('admin/dictionary', 'Backend\\DictionaryController');
+
+Route::resource('admin/feedback', 'Backend\\FeedbackController');

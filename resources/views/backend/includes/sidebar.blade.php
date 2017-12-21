@@ -58,6 +58,13 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/feedback')) }}">
+                <a href="{{ route('feedback.index') }}">
+                    <i class="fa fa-circle-o"></i>
+                    <span>Feedback</span>
+                </a>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             @role(1)

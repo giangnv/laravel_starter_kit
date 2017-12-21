@@ -1,0 +1,26 @@
+{
+    "fields": [
+        {
+            "name": "email",
+            "type": "text"
+        },
+        {
+            "name": "fb",
+            "type": "text"
+        },
+        {
+            "name": "status",
+            "type": "string"
+        },
+        {
+            "name": "create_time",
+            "type": "datetime"
+        }
+    ],
+    "validations": [
+        {
+            "field": "email",
+            "rules": "required"
+        }
+    ]
+}
