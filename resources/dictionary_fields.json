@@ -22,7 +22,7 @@
         },
         {
             "name": "type",
-            "type": "string"
+            "type": "integer"
         }
     ],
     "validations": [

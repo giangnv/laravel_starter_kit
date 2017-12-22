@@ -31,7 +31,7 @@
 </div><div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
     <label for="type" class="col-md-4 control-label">{{ 'Type' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="type" type="text" id="type" value="{{ $dictionary->type or ''}}" >
+        <input class="form-control" name="type" type="number" id="type" value="{{ $dictionary->type or ''}}" >
         {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
