@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Dictionary;
 use Illuminate\Http\Request;
 
+use Event;
+use App\Events\DictionaryCreate;
+use App\Events\DictionaryUpdate;
+use App\Events\DictionaryDelete;
+
 class DictionaryController extends Controller
 {
     /**
@@ -59,8 +64,9 @@ class DictionaryController extends Controller
 		]);
         $requestData = $request->all();
         
-        Dictionary::create($requestData);
+        $dictionary = Dictionary::create($requestData);
 
+        event(new DictionaryCreate($dictionary));
         return redirect('admin/dictionary')->with('flash_message', 'Dictionary added!');
     }
 
@@ -110,6 +116,7 @@ class DictionaryController extends Controller
         $dictionary = Dictionary::findOrFail($id);
         $dictionary->update($requestData);
 
+        event(new DictionaryUpdate($dictionary));
         return redirect('admin/dictionary')->with('flash_message', 'Dictionary updated!');
     }
 
@@ -122,8 +129,10 @@ class DictionaryController extends Controller
      */
     public function destroy($id)
     {
+        $dictionary = Dictionary::findOrFail($id);
         Dictionary::destroy($id);
 
+        event(new DictionaryUpdate($dictionary));
         return redirect('admin/dictionary')->with('flash_message', 'Dictionary deleted!');
     }
 }
