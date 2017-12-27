@@ -36,11 +36,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/posts', 'Backend\\PostsController');
     Route::resource('admin/blog-posts', 'Backend\\BlogPostsController');
     Route::resource('admin/company', 'Backend\\CompanyController');
     Route::resource('admin/dictionary', 'Backend\\DictionaryController');
-
-    Route::resource('admin/feedback', 'Backend\\FeedbackController');    
+    Route::resource('admin/feedback', 'Backend\\FeedbackController');
+    Route::resource('admin/company-parse', 'Backend\\CompanyParseController');
 });
+

@@ -1,0 +1,1 @@
+php artisan crud:generate CompanyParse --fields_from_file="resources/company_parse_fields.json" --view-path=backend --controller-namespace=Backend --route-group=admin --form-helper=html

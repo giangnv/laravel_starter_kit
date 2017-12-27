@@ -44,8 +44,8 @@
                 </a>
             </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/company')) }}">
-                <a href="{{ route('company.index') }}">
+            <li class="{{ active_class(Active::checkUriPattern('admin/company-parse')) }}">
+                <a href="{{ route('company-parse.index') }}">
                     <i class="fa fa-circle-o"></i>
                     <span>Company</span>
                 </a>
