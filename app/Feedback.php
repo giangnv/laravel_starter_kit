@@ -35,5 +35,12 @@ class Feedback extends Model
      */
     protected $fillable = ['email', 'fb', 'status', 'create_time', 'note'];
 
-    
+    public static function getListStatus()
+    {
+        return [
+            'Not yet process',
+            'Completed',
+            'Not completed'
+        ];
+    }
 }

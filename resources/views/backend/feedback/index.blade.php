@@ -40,9 +40,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                                    $listStatus = ['0' => 'Not yet process', '1' => 'Completed', '2' => 'Not completed'];
-                                ?>
+
                                 @foreach($feedback as $item)
                                     <tr class={{ $item->status==1 ? "success" : ""}}>
                                         <td>{{ $loop->iteration or $item->id }}</td>

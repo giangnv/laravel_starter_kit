@@ -30,7 +30,9 @@ class FeedbackController extends Controller
             $feedback = Feedback::paginate($perPage);
         }
 
-        return view('backend.feedback.index', compact('feedback'));
+        $listStatus = Feedback::getListStatus();
+
+        return view('backend.feedback.index', compact('feedback', 'listStatus'));
     }
 
     /**
@@ -87,8 +89,9 @@ class FeedbackController extends Controller
     public function edit($id)
     {
         $feedback = Feedback::findOrFail($id);
+        $listStatus = Feedback::getListStatus();
 
-        return view('backend.feedback.edit', compact('feedback'));
+        return view('backend.feedback.edit', compact('feedback', 'listStatus'));
     }
 
     /**

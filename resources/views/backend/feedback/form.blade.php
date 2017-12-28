@@ -15,7 +15,7 @@
 <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
     <label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>
     <div class="col-md-6">
-        {{ Form::select('status', ['0' => 'Not yet process', '1' => 'Completed', '2' => 'Not completed'], $feedback->status, ['class' => 'form-control']) }}
+        {{ Form::select('status', $listStatus, $feedback->status, ['class' => 'form-control']) }}
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
