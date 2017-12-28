@@ -29,6 +29,7 @@
                         <form method="POST" action="{{ url('/admin/dictionary/' . $dictionary->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
+                            {!! Form::hidden('redirects_to', URL::previous()) !!}
 
                             @include ('backend.dictionary.form', ['submitButtonText' => 'Update'])
 

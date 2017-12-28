@@ -30,6 +30,7 @@
                         <form method="POST" action="{{ url('/admin/company-parse/' . $companyparse->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
+                            {!! Form::hidden('redirects_to', URL::previous()) !!}
 
                             @include ('backend.company-parse.form', ['submitButtonText' => 'Update'])
 

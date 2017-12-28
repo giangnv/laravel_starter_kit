@@ -126,7 +126,8 @@ class CompanyParseController extends Controller
         $companyparse = CompanyParse::findOrFail($id);
         $companyparse->update($requestData);
 
-        return redirect('admin/company-parse')->with('flash_message', 'Company updated!');
+        $url = $request->only('redirects_to');
+        return redirect()->to($url['redirects_to'])->with('flash_message', 'Company updated!');
     }
 
     /**

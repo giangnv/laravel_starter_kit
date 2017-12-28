@@ -117,7 +117,9 @@ class DictionaryController extends Controller
         $dictionary->update($requestData);
 
         event(new DictionaryUpdate($dictionary));
-        return redirect('admin/dictionary')->with('flash_message', 'Dictionary updated!');
+
+        $url = $request->only('redirects_to');
+        return redirect()->to($url['redirects_to'])->with('flash_message', 'Dictionary updated!');
     }
 
     /**

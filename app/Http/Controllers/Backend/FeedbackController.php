@@ -109,7 +109,8 @@ class FeedbackController extends Controller
         $feedback = Feedback::findOrFail($id);
         $feedback->update($requestData);
 
-        return redirect('admin/feedback')->with('flash_message', 'Feedback updated!');
+        $url = $request->only('redirects_to');
+        return redirect()->to($url['redirects_to'])->with('flash_message', 'Feedback updated!');
     }
 
     /**
