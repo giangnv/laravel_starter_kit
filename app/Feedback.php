@@ -33,7 +33,7 @@ class Feedback extends Model
      *
      * @var array
      */
-    protected $fillable = ['email', 'fb', 'status', 'create_time'];
+    protected $fillable = ['email', 'fb', 'status', 'create_time', 'note'];
 
     
 }

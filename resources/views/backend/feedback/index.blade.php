@@ -27,24 +27,29 @@
 
                         <br/>
                         <br/>
-                        <div class="table-responsive">
+                        <div class="table">
                             <table id="fb-list" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th width="5%">#</th>
-                                        <th width="30%">Email</th>
-                                        <th width="45%">Feedback content</th>
+                                        <th width="25%">Email</th>
+                                        <th width="40%">Feedback content</th>
                                         <th width="5%">Status</th>
+                                        <th width="10%">Note</th>
                                         <th width="15%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    $listStatus = ['0' => 'Not yet process', '1' => 'Completed', '2' => 'Not completed'];
+                                ?>
                                 @foreach($feedback as $item)
                                     <tr class={{ $item->status ? "success" : ""}}>
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td><textarea class="form-control" row="15" >{{ $item->email }}</textarea></td>
                                         <td class="feedback_content">{{ $item->fb }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $listStatus[$item->status] }}</td>
+                                        <td><p>{{ $item->note }}</p></td>
                                         <td>
                                             <a href="{{ url('/admin/feedback/' . $item->id) }}" title="View Feedback"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/feedback/' . $item->id . '/edit') }}" title="Edit Feedback"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

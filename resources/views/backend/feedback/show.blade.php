@@ -26,13 +26,16 @@
                         <br/>
                         <br/>
 
+                        <?php
+                            $listStatus = ['0' => 'Not yet process', '1' => 'Completed', '2' => 'Not completed'];
+                        ?>
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $feedback->id }}</td>
                                     </tr>
-                                    <tr><th> Email </th><td> {{ $feedback->email }} </td></tr><tr><th> Fb </th><td> {{ $feedback->fb }} </td></tr><tr><th> Status </th><td> {{ $feedback->status }} </td></tr>
+                                    <tr><th> Email </th><td> {{ $feedback->email }} </td></tr><tr><th> Fb </th><td> {{ $feedback->fb }} </td></tr><tr><th> Status </th><td> {{ $listStatus[$feedback->status] }} </td></tr>
                                 </tbody>
                             </table>
                         </div>
