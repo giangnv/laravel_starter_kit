@@ -16,6 +16,9 @@
                     <div class="panel-body">
                         <form method="GET" action="{{ url('/admin/feedback') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
                             <div class="input-group">
+                                {{ Form::select('status', array_merge(['' => 'Select status'], $listStatus), null, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">

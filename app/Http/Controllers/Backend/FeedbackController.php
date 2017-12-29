@@ -18,14 +18,23 @@ class FeedbackController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $status = $request->get('status');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $feedback = Feedback::where('email', 'LIKE', "%$keyword%")
-                ->orWhere('fb', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('create_time', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
+        if (!empty($status) || !empty($keyword)) {
+            $feedback = new Feedback;
+
+            if (!empty($keyword)) {
+                $feedback = $feedback->where('email', 'LIKE', "%$keyword%")
+                    ->orWhere('note', 'LIKE', "%$keyword%")
+                    ->orWhere('fb', 'LIKE', "%$keyword%");
+            }
+
+            if (!empty($status)) {
+                $feedback = $feedback->where('status', '=', $status);
+            }
+
+            $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
         } else {
             $feedback = Feedback::paginate($perPage);
         }
