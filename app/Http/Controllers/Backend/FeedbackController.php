@@ -36,7 +36,7 @@ class FeedbackController extends Controller
 
             $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
         } else {
-            $feedback = Feedback::paginate($perPage);
+            $feedback = Feedback::orderBy('id', 'desc')->paginate($perPage);
         }
 
         $listStatus = Feedback::getListStatus();
