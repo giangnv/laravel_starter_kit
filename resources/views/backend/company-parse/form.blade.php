@@ -140,6 +140,7 @@
 
         companyParseRequest.done(function(data) {
             let result = data.result;
+            if (!data.result) return false;
             $.map(result.info, (val, index) => {
                 if (index != 'url') {
                     $('#' + index).val(val)
