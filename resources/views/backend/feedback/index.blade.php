@@ -48,7 +48,10 @@
                                     <tr class={{ $item->status==1 ? "success" : ""}}>
                                         <td>{{ $loop->iteration }} [ID: {{$item->id}}]</td>
                                         <td><textarea class="form-control" row="15" >{{ $item->email }}</textarea></td>
-                                        <td class="feedback_content">{{ $item->fb }}</td>
+                                        <td class="feedback_content">
+                                            <div class="fb_content_origin">{{ $item->fb }}</div>
+                                            <div class="fb_content_parse"></div>
+                                        </td>
                                         <td>{{ $listStatus[$item->status] }}</td>
                                         <td><p>{{ $item->note }}</p></td>
                                         <td>
@@ -60,6 +63,8 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete Feedback" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
+
+                                            <button class="btn btn-info btn-xs btn-check-fb" title="Check"><i class="fa fa-check" aria-hidden="true"></i> Check</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,21 +78,35 @@
             </div>
         </div>
     </div>
+
+    <div id="check-modal"  class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Check result</h4>
+            </div>
+            <div class="modal-body" id="check-result"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 {{ Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}
 
 <script type="application/javascript" language="javascript">
+    var ordering = [
+        'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
+        'given_name_katakana', 'email', 'dept', 'position', 'company_name',
+        'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
+    ];
     $(document).ready(function(){
         $('#fb-list tr td.feedback_content').each(function() {
             try {
-                var jsonObj = JSON.parse($(this).html())
-                var ordering = [
-                    'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
-                    'given_name_katakana', 'email', 'dept', 'position', 'company_name',
-                    'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
-                ];
-
+                var jsonObj = JSON.parse($(this).find('.fb_content_origin').html())
                 var feedbackOrdered = ordering.map(orderItem => {
                     let key = `fb[${orderItem}]`
                     return jsonObj.hasOwnProperty(key) ? jsonObj[key] : ''
@@ -100,12 +119,49 @@
                     return `<p><strong>${ordering[key]}</strong>: ${fb}</p>`
                 }).join('')
                 
-                $(this).html(newText);
+                $(this).find('.fb_content_parse').html(newText)
+                $(this).find('.fb_content_origin').hide()
                 $(this).parent().find('textarea').height($(this).height() - 10)
             } catch (e) {
                 return false;
             }
         });
+
+        // Check feedback updated
+        $('.btn-check-fb').click(function(e){
+            var $this = $(this)
+            var emailContent = $this.parent().parent().find('textarea').val()
+            var fbContent = JSON.parse($this.parent().parent().find('.fb_content_origin').html())
+            var $modal = $('#check-modal')
+            var request = $.ajax({
+                url: '{{route('admin.api-email-parser')}}',
+                type: 'post',
+                data: {email: emailContent},
+                dataType: 'json',
+            })
+
+            request.done(function(data){
+                var feedbackOrdered = ordering.map(orderItem => {
+                    let key = `fb[${orderItem}]`
+                    return fbContent.hasOwnProperty(key) ? fbContent[key] : ''
+                });
+
+                var checkResultText = feedbackOrdered.map((fb, key) => {
+                    if (!fb) {
+                        return ''
+                    }
+                    let classOfItem = fb == data[key] ? 'bg-success' : 'bg-danger'
+                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${data[key]} <mark>[${fb}]</mark></p>`
+                }).join('')
+
+                $('#check-result').html(checkResultText)
+                $modal.modal({backdrop: 'static', keyboard: false});
+            });
+
+            request.fail(function(e) {
+                throw 'Error';
+            });
+        })
     })
     
 </script>
