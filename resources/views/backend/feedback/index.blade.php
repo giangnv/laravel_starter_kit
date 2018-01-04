@@ -151,8 +151,8 @@
                     if (!fb) {
                         return ''
                     }
-                    let classOfItem = fb == result[key] ? 'bg-success' : 'bg-danger'
-                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${result[key]} <mark>[${fb}]</mark></p>`
+                    let classOfItem = fb == result[ordering[key]] ? 'bg-success' : 'bg-danger'
+                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${result[ordering[key]]} <mark>[${fb}]</mark></p>`
                 }).join('')
 
                 $('#check-result').html(checkResultText)
