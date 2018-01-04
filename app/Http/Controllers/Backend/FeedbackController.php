@@ -21,17 +21,17 @@ class FeedbackController extends Controller
         $status = $request->get('status');
         $perPage = 25;
 
-        if (!empty($status) || !empty($keyword)) {
+        if (!is_null($status) || !is_null($keyword)) {
             $feedback = new Feedback;
 
-            if (!empty($keyword)) {
+            if (!is_null($status)) {
+                $feedback = $feedback->where('status', '=', $status);
+            }
+            
+            if (!is_null($keyword)) {
                 $feedback = $feedback->where('email', 'LIKE', "%$keyword%")
                     ->orWhere('note', 'LIKE', "%$keyword%")
                     ->orWhere('fb', 'LIKE', "%$keyword%");
-            }
-
-            if (!empty($status)) {
-                $feedback = $feedback->where('status', '=', $status);
             }
 
             $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
