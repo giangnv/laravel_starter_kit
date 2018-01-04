@@ -141,6 +141,7 @@
             })
 
             request.done(function(data){
+                var result = data.result
                 var feedbackOrdered = ordering.map(orderItem => {
                     let key = `fb[${orderItem}]`
                     return fbContent.hasOwnProperty(key) ? fbContent[key] : ''
@@ -150,8 +151,8 @@
                     if (!fb) {
                         return ''
                     }
-                    let classOfItem = fb == data[key] ? 'bg-success' : 'bg-danger'
-                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${data[key]} <mark>[${fb}]</mark></p>`
+                    let classOfItem = fb == result[key] ? 'bg-success' : 'bg-danger'
+                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${result[key]} <mark>[${fb}]</mark></p>`
                 }).join('')
 
                 $('#check-result').html(checkResultText)
