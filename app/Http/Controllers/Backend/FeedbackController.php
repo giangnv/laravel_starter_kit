@@ -29,9 +29,11 @@ class FeedbackController extends Controller
             }
             
             if (!is_null($keyword)) {
-                $feedback = $feedback->where('email', 'LIKE', "%$keyword%")
-                    ->orWhere('note', 'LIKE', "%$keyword%")
-                    ->orWhere('fb', 'LIKE', "%$keyword%");
+                $feedback = $feedback->where(function ($q) use ($keyword){
+                        return $q->where('email', 'LIKE', "%$keyword%")
+                            ->orWhere('note', 'LIKE', "%$keyword%")
+                            ->orWhere('fb', 'LIKE', "%$keyword%");
+                    });
             }
 
             $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
