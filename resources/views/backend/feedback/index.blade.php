@@ -75,7 +75,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $feedback->appends(Input::except('page'))->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $feedback->appends(['range' => Request::get('range'), 'status' => Request::get('status'), 'search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>
