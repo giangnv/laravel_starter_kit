@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
 
+    const CREATED_AT = 'create_time';
+
     /**
      * The connection name for the model.
      *

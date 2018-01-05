@@ -20,6 +20,7 @@ class SendDictionaryNotify
             )
             ->get();
         Storage::append('dictionay_log.txt', '['. date('Y/m/d h:i:s') .']: [Added] - ' . $event->dictionary->id);
+        \Log::info('Added new dictionary: ' . $event->dictionary->id);
     }
     
     public function onDictionaryUpdate($event)
@@ -33,6 +34,7 @@ class SendDictionaryNotify
             )
             ->get();
         Storage::append('dictionay_log.txt', '['. date('Y/m/d h:i:s') .']: [Updated] - ' . $event->dictionary->id);
+        \Log::info('Editted dictionary: ' . $event->dictionary->id);
     }
     
     public function onDictionaryDelete($event)
@@ -46,6 +48,7 @@ class SendDictionaryNotify
             )
             ->get();
         Storage::append('dictionary_log.txt', '['. date('Y/m/d h:i:s') .']: [Deleted] - ' . $event->dictionary->id);
+        \Log::info('Deleted dictionary: ' . $event->dictionary->id);
     }
 
     public function subscribe($events)
