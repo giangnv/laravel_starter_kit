@@ -16,6 +16,9 @@
                     <div class="panel-body">
                         <form method="GET" action="{{ url('/admin/feedback') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
                             <div class="input-group">
+                                <input type="text" class="form-control" name="range" value="{{ request('range') }}">
+                            </div>
+                            <div class="input-group">
                                 {{ Form::select('status', array_merge(['' => 'Select status'], $listStatus), null, ['class' => 'form-control']) }}
                             </div>
                             <div class="input-group">
@@ -36,9 +39,10 @@
                                     <tr>
                                         <th width="5%">#</th>
                                         <th width="25%">Email</th>
-                                        <th width="40%">Feedback content</th>
+                                        <th width="30%">Feedback content</th>
                                         <th width="5%">Status</th>
                                         <th width="10%">Note</th>
+                                        <th width="10%">Create Time</th>
                                         <th width="15%">Actions</th>
                                     </tr>
                                 </thead>
@@ -54,6 +58,7 @@
                                         </td>
                                         <td>{{ $listStatus[$item->status] }}</td>
                                         <td><p>{{ $item->note }}</p></td>
+                                        <td><p>{{ $item->create_time }}</p></td>
                                         <td>
                                             <a href="{{ url('/admin/feedback/' . $item->id) }}" title="View Feedback"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/feedback/' . $item->id . '/edit') }}" title="Edit Feedback"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
@@ -105,7 +110,13 @@
     </div><!-- /.modal -->
 @endsection
 
-{{ Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}
+{{ Html::script('//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}
+{{ Html::script('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}
+
+{{ Html::style('//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css') }}
+
+{{ Html::script('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}
+{{ Html::style('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}
 
 <script type="application/javascript" language="javascript">
     var ordering = [
@@ -113,7 +124,15 @@
         'given_name_katakana', 'email', 'dept', 'position', 'company_name',
         'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
     ];
-    $(document).ready(function(){
+
+    $.noConflict()
+    jQuery(document).ready(function($){
+        $('input[name="range"]').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+        })
+
         $('#fb-list tr td.feedback_content').each(function() {
             try {
                 var jsonObj = JSON.parse($(this).find('.fb_content_origin').html())
