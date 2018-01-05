@@ -119,20 +119,23 @@
 {{ Html::style('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}
 
 <script type="application/javascript" language="javascript">
-    var ordering = [
-        'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
-        'given_name_katakana', 'email', 'dept', 'position', 'company_name',
-        'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
-    ];
-
-    $.noConflict()
     jQuery(document).ready(function($){
         $('input[name="range"]').daterangepicker({
             locale: {
                 format: 'YYYY-MM-DD'
             },
         })
+    })
+</script>
 
+<script type="application/javascript" language="javascript">
+    var ordering = [
+        'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
+        'given_name_katakana', 'email', 'dept', 'position', 'company_name',
+        'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
+    ];
+
+    $(document).ready(function(){
         $('#fb-list tr td.feedback_content').each(function() {
             try {
                 var jsonObj = JSON.parse($(this).find('.fb_content_origin').html())
