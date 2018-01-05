@@ -86,7 +86,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Check result</h4>
             </div>
-            <div class="modal-body" id="check-result"></div>
+            <div class="modal-body">
+                <table id="check-result" class="table table-bordered">
+                    <thead>
+                        <th>Index</th>
+                        <th>Actual</th>
+                        <th>Expected</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -153,10 +163,11 @@
                         return ''
                     }
                     let classOfItem = fb == result[ordering[key]] ? 'bg-success' : 'bg-danger'
+                    return `<tr class=${classOfItem}><td>${ordering[key]}</td><td>${result[ordering[key]]}</td><td>${fb}</td></tr>`
                     return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${result[ordering[key]]} <mark>[${fb}]</mark></p>`
                 }).join('')
 
-                $('#check-result').html(checkResultText)
+                $('#check-result tbody').html(checkResultText)
                 $modal.modal({backdrop: 'static', keyboard: false});
             });
 
