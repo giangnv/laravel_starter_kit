@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', 'Backend\\DashboardController@index')->name('frontend.index');
     Route::resource('admin/posts', 'Backend\\PostsController');
     Route::resource('admin/blog-posts', 'Backend\\BlogPostsController');
     Route::resource('admin/company', 'Backend\\CompanyController');

@@ -142,6 +142,7 @@
 
             request.done(function(data){
                 var result = data.result.signature
+                if (!result) return
                 var feedbackOrdered = ordering.map(orderItem => {
                     let key = `fb[${orderItem}]`
                     return fbContent.hasOwnProperty(key) ? fbContent[key] : ''
