@@ -19,9 +19,10 @@ class FeedbackController extends Controller
     {
         $keyword = $request->get('search');
         $status = $request->get('status');
+        $range = $request->get('range');
         $perPage = 25;
 
-        if (!is_null($status) || !is_null($keyword)) {
+        if (!is_null($status) || !is_null($keyword) || !is_null($range)) {
             $feedback = new Feedback;
 
             if (!is_null($status)) {
@@ -34,6 +35,13 @@ class FeedbackController extends Controller
                             ->orWhere('note', 'LIKE', "%$keyword%")
                             ->orWhere('fb', 'LIKE', "%$keyword%");
                     });
+            }
+
+            if (!is_null($range)) {
+                $rangeArr = explode(' - ', $range);
+                $rangeArr[0] = $rangeArr[0]. ' 00:00:00';
+                $rangeArr[1] = $rangeArr[1]. ' 23:59:59';
+                $feedback = $feedback->whereBetween('create_time', $rangeArr);
             }
 
             $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
