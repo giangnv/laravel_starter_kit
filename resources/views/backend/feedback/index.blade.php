@@ -15,6 +15,11 @@
                     <div class="panel-heading">Feedback</div>
                     <div class="panel-body">
                         <form method="GET" action="{{ url('/admin/feedback') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <label>Filter by ID:</label>
+                                {{ Form::select('operator', array_merge(['' => 'Select operator'], ['=' => '=', '>=' => '>=', '<=' => '<=']), null, ['class' => 'form-control']) }}
+                                <input type="number" class="form-control" name="id" value="{{ request('id') }}" style="display:none" placeholder="ID..">
+                            </div>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="range" value="{{ request('range') }}">
                             </div>
@@ -75,7 +80,13 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $feedback->appends(['range' => Request::get('range'), 'status' => Request::get('status'), 'search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $feedback->appends([
+                                'range' => Request::get('range'), 
+                                'status' => Request::get('status'), 
+                                'operator' => Request::get('operator'), 
+                                'id' => Request::get('id'), 
+                                'search' => Request::get('search'),
+                                ])->render() !!} </div>
                         </div>
 
                     </div>
@@ -138,27 +149,33 @@
     $(document).ready(function(){
         $('#fb-list tr td.feedback_content').each(function() {
             try {
-                var jsonObj = JSON.parse($(this).find('.fb_content_origin').html())
+                let originEl = $(this).find('.fb_content_origin')
+                let parseEl = $(this).find('.fb_content_parse')
+
+                var jsonObj = JSON.parse(originEl.html())
                 var feedbackOrdered = ordering.map(orderItem => {
                     let key = `fb[${orderItem}]`
                     return jsonObj.hasOwnProperty(key) ? jsonObj[key] : ''
                 });
 
                 var newText = feedbackOrdered.map((fb, key) => {
-                    if (!fb) {
-                        return ''
-                    }
+                    if (!fb) return ''
                     return `<p><strong>${ordering[key]}</strong>: ${fb}</p>`
                 }).join('')
                 
-                $(this).find('.fb_content_parse').html(newText)
-                $(this).find('.fb_content_origin').hide()
+                parseEl.html(newText)
+                originEl.hide()
                 $(this).parent().find('textarea').height($(this).height() - 10)
             } catch (e) {
-                return false;
+                console.log(e)
             }
         });
 
+        $('select[name="operator"]').change(val => {
+            val == '' ? $('input[name="id"]').hide() : $('input[name="id"]').show()
+        })
+
+        $('select[name="operator"]').val() == '' ? $('input[name="id"]').hide() : $('input[name="id"]').show()
         // Check feedback updated
         $('.btn-check-fb').click(function(e){
             var $this = $(this)
@@ -186,7 +203,6 @@
                     }
                     let classOfItem = fb == result[ordering[key]] ? 'bg-success' : 'bg-danger'
                     return `<tr class=${classOfItem}><td>${ordering[key]}</td><td>${result[ordering[key]]}</td><td>${fb}</td></tr>`
-                    return `<p class=${classOfItem}><strong>${ordering[key]}</strong>: ${result[ordering[key]]} <mark>[${fb}]</mark></p>`
                 }).join('')
 
                 $('#check-result tbody').html(checkResultText)

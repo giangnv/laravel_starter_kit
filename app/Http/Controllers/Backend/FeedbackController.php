@@ -20,9 +20,13 @@ class FeedbackController extends Controller
         $keyword = $request->get('search');
         $status = $request->get('status');
         $range = $request->get('range');
+        $operator = $request->get('operator');
+        $id = $request->get('id');
         $perPage = 25;
 
-        if (!is_null($status) || !is_null($keyword) || !is_null($range)) {
+        if (!is_null($status) || !is_null($keyword) || !is_null($range)
+            || (!is_null($operator) && !is_null($id))
+            ) {
             $feedback = new Feedback;
 
             if (!is_null($status)) {
@@ -42,6 +46,10 @@ class FeedbackController extends Controller
                 $rangeArr[0] = $rangeArr[0]. ' 00:00:00';
                 $rangeArr[1] = $rangeArr[1]. ' 23:59:59';
                 $feedback = $feedback->whereBetween('create_time', $rangeArr);
+            }
+            
+            if (!is_null($operator) && !is_null($id)) {
+                $feedback = $feedback->where('id', $operator, $id);
             }
 
             $feedback = $feedback->orderBy('id', 'desc')->paginate($perPage);
