@@ -29,7 +29,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
+                                    <button class="btn btn-default" id="search-btn" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -130,7 +130,7 @@
 {{ Html::style('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}
 
 <style>
-   .btn {
+   #search-btn {
        padding: 9px 12px !important;
    } 
 </style>
