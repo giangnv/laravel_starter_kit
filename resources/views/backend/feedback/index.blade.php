@@ -129,6 +129,11 @@
 {{ Html::script('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}
 {{ Html::style('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}
 
+<style>
+   .btn {
+       padding: 9px 12px !important;
+   } 
+</style>
 <script type="application/javascript" language="javascript">
     jQuery(document).ready(function($){
         $('input[name="range"]').daterangepicker({
@@ -144,13 +149,12 @@
 </script>
 
 <script type="application/javascript" language="javascript">
-    var ordering = [
-        'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
-        'given_name_katakana', 'email', 'dept', 'position', 'company_name',
-        'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
-    ];
-
     $(document).ready(function(){
+        var ordering = [
+            'family_name_kanji', 'given_name_kanji', 'family_name_katakana',
+            'given_name_katakana', 'email', 'dept', 'position', 'company_name',
+            'zip', 'prefecture', 'address1', 'address2', 'building', 'mobile', 'tel', 'fax', 'url'
+        ];
         $('#fb-list tr td.feedback_content').each(function() {
             try {
                 let originEl = $(this).find('.fb_content_origin')
