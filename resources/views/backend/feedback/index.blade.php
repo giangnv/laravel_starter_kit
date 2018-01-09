@@ -132,10 +132,14 @@
 <script type="application/javascript" language="javascript">
     jQuery(document).ready(function($){
         $('input[name="range"]').daterangepicker({
+            autoUpdateInput: false,
             locale: {
                 format: 'YYYY-MM-DD'
             },
         })
+        $('input[name="range"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+        });
     })
 </script>
 
@@ -176,6 +180,7 @@
         })
 
         $('select[name="operator"]').val() == '' ? $('input[name="id"]').hide() : $('input[name="id"]').show()
+
         // Check feedback updated
         $('.btn-check-fb').click(function(e){
             var $this = $(this)
