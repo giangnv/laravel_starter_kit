@@ -21,7 +21,7 @@
                                 <input type="number" class="form-control" name="id" value="{{ request('id') }}" style="display:none" placeholder="ID..">
                             </div>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="range" value="{{ request('range') }}">
+                                <input type="text" class="form-control" name="range" value="{{ request('range') }}" placeholder="Filter by created date">
                             </div>
                             <div class="input-group">
                                 {{ Form::select('status', array_merge(['' => 'Select status'], $listStatus), null, ['class' => 'form-control']) }}
