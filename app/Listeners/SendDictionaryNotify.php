@@ -9,6 +9,8 @@ use Ixudra\Curl\Facades\Curl;
 
 class SendDictionaryNotify
 {
+    const LOG_FILE = 'dictionary_log.txt';
+
     public function onDictionaryCreate($event)
     {
         $response = Curl::to(config('settings.dictionary_callback_api_host') . 'add_entry')
@@ -19,7 +21,7 @@ class SendDictionaryNotify
                 ]
             )
             ->get();
-        Storage::append('dictionay_log.txt', '['. date('Y/m/d h:i:s') .']: [Added] - ' . $event->dictionary->id);
+        Storage::append(self::LOG_FILE, '['. date('Y/m/d h:i:s') .']: [Added] - ' . $event->dictionary->id);
         \Log::info('Added new dictionary: ' . $event->dictionary->id);
     }
     
@@ -33,7 +35,7 @@ class SendDictionaryNotify
                 ]
             )
             ->get();
-        Storage::append('dictionay_log.txt', '['. date('Y/m/d h:i:s') .']: [Updated] - ' . $event->dictionary->id);
+        Storage::append(self::LOG_FILE, '['. date('Y/m/d h:i:s') .']: [Updated] - ' . $event->dictionary->id);
         \Log::info('Editted dictionary: ' . $event->dictionary->id);
     }
     
@@ -47,8 +49,16 @@ class SendDictionaryNotify
                 ]
             )
             ->get();
-        Storage::append('dictionary_log.txt', '['. date('Y/m/d h:i:s') .']: [Deleted] - ' . $event->dictionary->id);
+        Storage::append(self::LOG_FILE, '['. date('Y/m/d h:i:s') .']: [Deleted] - ' . $event->dictionary->id);
         \Log::info('Deleted dictionary: ' . $event->dictionary->id);
+    }
+
+    public function onCompanyCreate($event)
+    {
+        $response = Curl::to(config('settings.email_api_host') . 'update_dic')
+            ->get();
+        Storage::append(self::LOG_FILE, '['. date('Y/m/d h:i:s') .']: [Added new company] - ' . $event->company->id);
+        \Log::info('Added new company: ' . $event->company->id);
     }
 
     public function subscribe($events)
@@ -66,6 +76,11 @@ class SendDictionaryNotify
         $events->listen(
             'App\Events\DictionaryDelete',
             'App\Listeners\SendDictionaryNotify@onDictionaryDelete'
+        );
+        
+        $events->listen(
+            'App\Events\CompanyCreate',
+            'App\Listeners\SendDictionaryNotify@onCompanyCreate'
         );
 
     }

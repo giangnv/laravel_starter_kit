@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 use Ixudra\Curl\Facades\Curl;
 
+use Event;
+use App\Events\CompanyCreate;
+
 class CompanyParseController extends Controller
 {
     /**
@@ -75,7 +78,8 @@ class CompanyParseController extends Controller
 		]);
         $requestData = $request->all();
         
-        CompanyParse::create($requestData);
+        $company = CompanyParse::create($requestData);
+        event(new CompanyCreate($company));
 
         return redirect('admin/company-parse')->with('flash_message', 'Company added!');
     }
